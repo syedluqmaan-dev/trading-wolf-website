@@ -121,7 +121,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Header Styles - UPDATED FOR MOBILE */
+        /* Header Styles */
         header {
             background-color: white;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -218,7 +218,7 @@
             width: 100%;
         }
 
-        /* Desktop CTA Button - Hidden on Mobile */
+        /* Desktop CTA Button */
         .desktop-cta {
             display: block;
         }
@@ -404,7 +404,7 @@
             transform: translateY(-3px);
         }
 
-        /* Stock Ticker - FIXED FOR MOBILE */
+        /* Stock Ticker */
         .ticker-container {
             position: relative;
             bottom: 0;
@@ -472,13 +472,6 @@
         @keyframes ticker-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
-        }
-
-        /* Pause on hover for desktop */
-        @media (hover: hover) {
-            .ticker:hover {
-                animation-play-state: paused;
-            }
         }
 
         /* Courses Section */
@@ -894,7 +887,7 @@
             resize: vertical;
         }
 
-        /* Modal */
+        /* Modal - UPDATED FOR PERFECT SIZE */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -907,6 +900,7 @@
             align-items: center;
             z-index: 2000;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-overlay.active {
@@ -918,19 +912,22 @@
             border-radius: 15px;
             width: 100%;
             max-width: 500px;
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
             animation: modalFadeIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
         }
 
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(-20px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
@@ -939,12 +936,19 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
         }
 
         .modal-header h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: var(--secondary);
             font-weight: 700;
+            margin: 0;
         }
 
         .close-modal {
@@ -953,6 +957,86 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--gray);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: var(--light-gray);
+            color: var(--accent-red);
+        }
+
+        /* Form inside modal */
+        .modal .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        .modal .form-group input,
+        .modal .form-group select,
+        .modal .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: white;
+        }
+
+        .modal .form-group input:focus,
+        .modal .form-group select:focus,
+        .modal .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.1);
+        }
+
+        .modal .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Submit button in modal */
+        .modal .cta-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        /* Scrollbar styling for modal */
+        .modal::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .modal::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
 
         /* Footer */
@@ -1055,7 +1139,7 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Design - UPDATED FOR MOBILE */
+        /* Responsive Design */
         @media (max-width: 1100px) {
             .courses-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1099,6 +1183,13 @@
             .ticker-container {
                 position: relative;
                 margin-top: 25px;
+            }
+
+            /* Modal responsive for tablet */
+            .modal {
+                max-width: 90%;
+                max-height: 85vh;
+                margin: 20px;
             }
         }
 
@@ -1165,6 +1256,40 @@
                 width: 85%;
                 max-width: 300px;
             }
+
+            /* Modal responsive for mobile */
+            .modal {
+                padding: 25px 20px;
+            }
+            
+            .modal-header {
+                margin-bottom: 20px;
+                padding-bottom: 12px;
+            }
+            
+            .modal-header h3 {
+                font-size: 1.4rem;
+            }
+            
+            .modal .form-group {
+                margin-bottom: 18px;
+            }
+            
+            .modal .form-group input,
+            .modal .form-group select,
+            .modal .form-group textarea {
+                padding: 12px 14px;
+                font-size: 0.95rem;
+            }
+            
+            .modal .form-group textarea {
+                min-height: 100px;
+            }
+            
+            .modal .cta-button {
+                padding: 14px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1176,9 +1301,6 @@
             }
             .section-title h2 {
                 font-size: 1.8rem;
-            }
-            .modal {
-                padding: 30px 20px;
             }
             .contact-form {
                 padding: 30px 20px;
@@ -1221,6 +1343,44 @@
             .ticker {
                 animation: ticker-scroll 25s linear infinite;
             }
+
+            /* Modal responsive for small mobile */
+            .modal {
+                padding: 20px 16px;
+                max-width: 95%;
+                max-height: 80vh;
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .modal-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .modal .form-group {
+                margin-bottom: 16px;
+            }
+            
+            .modal .form-group label {
+                font-size: 0.9rem;
+            }
+            
+            .modal .form-group input,
+            .modal .form-group select,
+            .modal .form-group textarea {
+                padding: 11px 13px;
+                font-size: 0.9rem;
+            }
+            
+            .modal .form-group textarea {
+                min-height: 90px;
+            }
+            
+            .close-modal {
+                width: 32px;
+                height: 32px;
+                font-size: 1.3rem;
+            }
         }
 
         @media (max-width: 360px) {
@@ -1258,6 +1418,21 @@
                 font-size: 0.7rem;
                 padding: 1px 4px;
             }
+
+            /* Modal responsive for extra small mobile */
+            .modal {
+                padding: 18px 14px;
+                border-radius: 10px;
+            }
+            
+            .modal-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .modal .form-group input,
+            .modal .form-group select {
+                padding: 10px 12px;
+            }
         }
 
         /* Desktop specific ticker fix */
@@ -1265,6 +1440,13 @@
             .ticker-container {
                 position: absolute;
                 margin-top: 0;
+            }
+        }
+
+        /* Desktop specific modal */
+        @media (min-width: 769px) {
+            .modal {
+                min-width: 450px;
             }
         }
     </style>
@@ -1315,7 +1497,7 @@
                 </div>
             </div>
             
-            <!-- Desktop Navigation (Visible on larger screens) -->
+            <!-- Desktop Navigation -->
             <div class="desktop-nav">
                 <nav>
                     <ul>
@@ -1327,11 +1509,11 @@
                         <li><a href="#center">Center</a></li>
                     </ul>
                 </nav>
-                <!-- Enroll button - Hidden on mobile, visible on desktop -->
+                <!-- Enroll button -->
                 <button class="cta-button desktop-cta" id="desktopEnrollButton">Enroll Now</button>
             </div>
             
-            <!-- Mobile Menu Button (Visible on mobile) -->
+            <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -1350,7 +1532,7 @@
             </div>
         </div>
         
-        <!-- Stock Ticker - FIXED FOR MOBILE -->
+        <!-- Stock Ticker -->
         <div class="ticker-container">
             <div class="ticker" id="stockTicker"></div>
         </div>
@@ -1369,14 +1551,14 @@
                     <div class="course-icon"><i class="fas fa-chart-line"></i></div>
                     <h3>Equity Investment & Trading</h3>
                     <p>From basics to advanced strategies for equity markets. Learn fundamental analysis, technical analysis, and risk management for long-term wealth creation.</p>
-                    <button class="cta-button enroll-course" data-course="Scratch to Advance Equity Investment and Trading">Enroll Now</button>
+                    <button class="cta-button enroll-course" data-course="Equity Investment & Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-exchange-alt"></i></div>
                     <h3>F&O Trading</h3>
                     <p>Master Futures & Options trading with proven strategies. Learn option Greeks, strategies for different market conditions, and risk management techniques.</p>
-                    <button class="cta-button enroll-course" data-course="Scratch to Advance F&O Trading">Enroll Now</button>
+                    <button class="cta-button enroll-course" data-course="F&O Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
@@ -1390,14 +1572,14 @@
                     <div class="course-icon"><i class="fas fa-briefcase"></i></div>
                     <h3>Full-Time Trading Career</h3>
                     <p>Transform trading from a hobby to a full-time profession. Includes capital management, psychology, and building a sustainable trading business.</p>
-                    <button class="cta-button enroll-course" data-course="Full-Time Trading Career Program">Enroll Now</button>
+                    <button class="cta-button enroll-course" data-course="Full-Time Trading Career">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-globe"></i></div>
                     <h3>Forex Market Trading</h3>
                     <p>Master the largest financial market in the world. Learn currency pairs analysis, forex strategies, and risk management for consistent profits.</p>
-                    <button class="cta-button enroll-course" data-course="Forex Market Trading from Scratch">Enroll Now</button>
+                    <button class="cta-button enroll-course" data-course="Forex Market Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
@@ -1424,7 +1606,7 @@
                         <div class="benefits-grid">
                             <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-sync-alt"></i></div><h4>Revision Classes</h4></div>
                             <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-calendar-check"></i></div><h4>3 Months Support</h4></div>
-
+                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-star"></i></div><h4>5-Star Trading Setup</h4></div>
                             <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-users"></i></div><h4>Premium Analysis Community</h4></div>
                             <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-brain"></i></div><h4>Trading Psychology Training</h4></div>
                             <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-clipboard-check"></i></div><h4>Ultimate Trader's Checklist</h4></div>
@@ -1573,7 +1755,6 @@
                 <div class="footer-social">
                     <h3>Follow Us</h3>
                     <div class="social-icons">
-                       
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -1749,40 +1930,132 @@
             loadingOverlay.classList.remove('active');
         }
 
-        // Backend API Integration
+        // TELEGRAM INTEGRATION - UPDATED
         async function submitForm(formData, formType) {
             showLoading();
             
             try {
                 // ============================================
-                // BACKEND INTEGRATION POINT
+                // TELEGRAM BOT SETTINGS - REPLACE WITH YOUR DETAILS
                 // ============================================
-                // Replace this URL with your actual backend endpoint
-                const backendUrl = 'https://your-backend-api.com/submit-form';
+                const BOT_TOKEN = '8354469109:AAGKx5eNlKi5vnlRsfoZMurMVucmCpTmijE'; // Your Bot Token
+                const CHAT_ID = 'YOUR_CHAT_ID'; // Your Chat ID (get it from: https://api.telegram.org/botYOUR_BOT_TOKEN/getUpdates)
+                // ============================================
                 
-                // For demo purposes, we'll simulate a successful response
-                // Remove this setTimeout in production
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                // Create Telegram message
+                const message = createTelegramMessage(formData, formType);
                 
-                // ============================================
-                // TEMPORARY SOLUTION - For testing without backend
-                // ============================================
-                // Display the form data (for testing)
-                console.log('Form Data to be sent to backend:', formData);
-                console.log('Form Type:', formType);
-                console.log('This data would be sent to your backend at:', backendUrl);
+                // Send to Telegram
+                const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                
+                const response = await fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const result = await response.json();
                 
                 hideLoading();
-                return { success: true, message: 'Form submitted successfully!' };
+                
+                if (result.ok) {
+                    showNotification('✅ Thank you! We will contact you shortly.', 'success');
+                    
+                    // Clear form if it's the enrollment modal
+                    if (document.getElementById('enrollmentForm')) {
+                        document.getElementById('enrollmentForm').reset();
+                    }
+                    
+                    return { success: true, message: 'Sent to Telegram successfully!' };
+                } else {
+                    console.error('Telegram error:', result);
+                    // Fallback to WhatsApp
+                    sendWhatsAppFallback(formData);
+                    return { 
+                        success: false, 
+                        message: 'Failed to send notification. Details sent to WhatsApp instead.' 
+                    };
+                }
                 
             } catch (error) {
                 hideLoading();
-                console.error('Error submitting form:', error);
+                console.error('Error:', error);
+                
+                // Fallback to WhatsApp
+                sendWhatsAppFallback(formData);
+                
                 return { 
                     success: false, 
-                    message: 'Failed to submit form. Please try again or contact us directly.' 
+                    message: 'Network error. Details sent to WhatsApp instead.' 
                 };
             }
+        }
+
+        // Create beautiful Telegram message
+        function createTelegramMessage(data, type) {
+            const timestamp = new Date().toLocaleString('en-IN', {
+                timeZone: 'Asia/Kolkata',
+                weekday: 'short',
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            // Emoji and title based on form type
+            let emoji, title;
+            if (type === 'enrollment') {
+                emoji = '🎓';
+                title = 'NEW ENROLLMENT REQUEST';
+            } else if (type === 'contact') {
+                emoji = '📞';
+                title = 'CALLBACK REQUEST';
+            } else {
+                emoji = '📄';
+                title = 'BROCHURE REQUEST';
+            }
+            
+            return `
+${emoji} <b>${title}</b>
+${'─'.repeat(30)}
+
+👤 <b>Name:</b> ${data.name || 'Not provided'}
+📱 <b>Phone:</b> ${data.phone || 'Not provided'}
+📧 <b>Email:</b> ${data.email || 'Not provided'}
+🎓 <b>Course:</b> ${data.course || 'Not specified'}
+💬 <b>Message:</b> ${data.message || 'No additional message'}
+
+📋 <b>Type:</b> ${type}
+⏰ <b>Time:</b> ${timestamp}
+📍 <b>Source:</b> Trading Wolf Academy
+
+<b>Priority:</b> ${type === 'enrollment' ? '🚨 HIGH PRIORITY' : '📞 MEDIUM PRIORITY'}
+<b>Status:</b> 🟢 NEW LEAD
+
+<i>Reply within 10 minutes for best conversion!</i>
+`;
+        }
+
+        // WhatsApp fallback function
+        function sendWhatsAppFallback(formData) {
+            const phone = '917338377942';
+            const message = `New Lead from Trading Wolf Academy:
+Name: ${formData.name}
+Phone: ${formData.phone}
+Email: ${formData.email || 'Not provided'}
+Course: ${formData.course || 'Not specified'}
+Message: ${formData.message || 'No message'}
+Time: ${new Date().toLocaleString('en-IN')}`;
+            
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         // Form Submission Handlers
@@ -1807,12 +2080,8 @@
             const result = await submitForm(formData, 'enrollment');
             
             if (result.success) {
-                showNotification('Thank you! Your enrollment request has been submitted. We will contact you shortly.', 'success');
-                enrollmentForm.reset();
                 enrollmentModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
-            } else {
-                showNotification(result.message, 'error');
             }
         });
 
@@ -1833,14 +2102,8 @@
                 return;
             }
 
-            const result = await submitForm(formData, 'contact');
-            
-            if (result.success) {
-                showNotification('Thank you! Your callback request has been submitted. We will contact you shortly.', 'success');
-                contactForm.reset();
-            } else {
-                showNotification(result.message, 'error');
-            }
+            await submitForm(formData, 'contact');
+            contactForm.reset();
         });
 
         // Download Brochure
@@ -1851,29 +2114,20 @@
             const userEmail = prompt('Please enter your email address to receive the brochure:');
             
             if (userEmail && userEmail.includes('@')) {
-                showLoading();
-                
                 const formData = {
+                    name: 'Brochure Request',
                     email: userEmail,
                     type: 'brochure_request',
-                    timestamp: new Date().toISOString()
+                    message: 'Requested brochure download'
                 };
 
-                const result = await submitForm(formData, 'brochure');
-                
-                hideLoading();
-                
-                if (result.success) {
-                    showNotification('Brochure download link has been sent to your email!', 'success');
-                } else {
-                    showNotification('Failed to send brochure. Please try again.', 'error');
-                }
+                await submitForm(formData, 'brochure');
             } else if (userEmail) {
                 showNotification('Please enter a valid email address.', 'error');
             }
         });
 
-        // Stock Ticker - UPDATED WITH MORE CONTENT AND BETTER MOBILE SUPPORT
+        // Stock Ticker
         const stocks = [
             { symbol: "NIFTY 50", price: "18,245.30", change: "+1.25%", trend: "positive" },
             { symbol: "SENSEX", price: "61,284.75", change: "+0.98%", trend: "positive" },
@@ -1893,7 +2147,7 @@
         ];
 
         function populateTicker() {
-            stockTicker.innerHTML = ''; // Clear existing content
+            stockTicker.innerHTML = '';
             
             // Add double the items for seamless scrolling
             for (let i = 0; i < 2; i++) {
@@ -1909,7 +2163,6 @@
                 });
             }
             
-            // Adjust animation speed based on screen width
             adjustTickerSpeed();
         }
 
@@ -1918,11 +2171,11 @@
             const isSmallMobile = window.innerWidth <= 480;
             
             if (isSmallMobile) {
-                stockTicker.style.animationDuration = '25s'; // Fastest for small mobile
+                stockTicker.style.animationDuration = '25s';
             } else if (isMobile) {
-                stockTicker.style.animationDuration = '30s'; // Medium for tablet
+                stockTicker.style.animationDuration = '30s';
             } else {
-                stockTicker.style.animationDuration = '40s'; // Slower for desktop
+                stockTicker.style.animationDuration = '40s';
             }
         }
 
@@ -1931,17 +2184,6 @@
 
         // Adjust on resize
         window.addEventListener('resize', adjustTickerSpeed);
-
-        // Pause animation on hover (desktop only)
-        if (window.innerWidth > 768) {
-            stockTicker.addEventListener('mouseenter', () => {
-                stockTicker.style.animationPlayState = 'paused';
-            });
-            
-            stockTicker.addEventListener('mouseleave', () => {
-                stockTicker.style.animationPlayState = 'running';
-            });
-        }
 
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1963,7 +2205,7 @@
             });
         });
 
-        // Close mobile nav on window resize (if resized to desktop)
+        // Close mobile nav on window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 992 && mobileNav.classList.contains('active')) {
                 mobileNav.classList.remove('active');
@@ -1971,7 +2213,6 @@
                 document.body.style.overflow = 'auto';
             }
             
-            // Re-adjust ticker speed on resize
             adjustTickerSpeed();
         });
     </script>
