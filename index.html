@@ -760,7 +760,7 @@
             line-height: 1.7;
         }
 
-        /* ========== CONTACT SECTION (NOW CENTER + CONTACT COMBINED) ========== */
+        /* ========== CONTACT SECTION ========== */
         .contact {
             background-color: var(--light);
         }
@@ -804,7 +804,7 @@
             margin-top: 3px;
         }
 
-        /* MAP CONTAINER - FIXED WITH DIRECTIONS BUTTON */
+        /* MAP CONTAINER */
         .map-container {
             margin-top: 30px;
             border-radius: 15px;
@@ -888,6 +888,13 @@
         .form-group textarea {
             min-height: 150px;
             resize: vertical;
+        }
+
+        /* Mobile Contact Button */
+        .show-form-mobile {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
         }
 
         /* ========== MODAL ========== */
@@ -1050,24 +1057,59 @@
             line-height: 1.6;
         }
 
+        /* Developer Credit Styles */
         .creator-credit {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            color: var(--primary);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .typing-text {
+            font-size: 0.9rem;
+            color: #f7931a;
+            min-height: 25px;
+            text-align: center;
             font-weight: 500;
         }
 
-        .creator-credit a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s;
+        .ariar-link {
             display: inline-block;
-            margin: 0 5px;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #667eea 0%, white 100%);
+            color: #1a365d !important;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #667eea;
         }
 
-        .creator-credit a:hover {
-            color: white;
-            transform: translateY(-2px);
+        .ariar-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, white 0%, #667eea 100%);
+            color: white !important;
+        }
+
+        .ariar-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .ariar-link:hover::before {
+            left: 100%;
         }
 
         /* ========== LOADING & NOTIFICATION ========== */
@@ -1271,7 +1313,19 @@
             }
             
             .contact-form {
-                padding: 30px 20px;
+                display: none !important;
+            }
+            
+            .show-form-mobile {
+                display: block;
+            }
+            
+            .contact-info {
+                width: 100%;
+            }
+            
+            .contact-content {
+                gap: 40px;
             }
             
             .logo-img-box,
@@ -1287,6 +1341,15 @@
             
             .logo-text .tagline {
                 font-size: 0.75rem;
+            }
+            
+            .ariar-link {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .typing-text {
+                font-size: 0.85rem;
             }
         }
 
@@ -1306,10 +1369,6 @@
             
             .section-title h2 {
                 font-size: 1.8rem;
-            }
-            
-            .contact-form {
-                padding: 25px 15px;
             }
             
             .modal {
@@ -1379,6 +1438,11 @@
                 height: 45px;
                 font-size: 1.3rem;
             }
+            
+            .ariar-link {
+                padding: 6px 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -1419,17 +1483,10 @@
     <header>
         <div class="container header-container">
             <a href="#home" class="logo">
-                <!-- Option 1: Upload your logo to assets/logo.png -->
-                <!--
                 <div class="logo-img-box">
-                    <img src="assets/logo.png" alt="Trading Wolf Academy Logo" class="logo-img">
+                    <img src="assests/logo1.jpeg" alt="Trading Wolf Academy Logo" class="logo-img">
                 </div>
-                -->
                 
-                <!-- Option 2: Text logo (Currently active) -->
-                <div class="logo-img-box">
-        <img src="assests/logo1.jpeg" alt="Trading Wolf Academy Logo" class="logo-img">
-    </div>
                 <div class="logo-text">
                     <h1>Trading Wolf <span> Academy</span></h1>
                     <span class="tagline">Master the Market with Confidence</span>
@@ -1582,9 +1639,6 @@
             </div>
             
             <div class="trainer-content">
-                <!-- <div class="trainer-image">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Wasim Ahmed - CEO">
-                </div> -->
                 <div class="trainer-text">
                     <h3>Wasim Ahmed</h3>
                     <h4>CEO at Trading Wolf Academy</h4>
@@ -1643,7 +1697,7 @@
         </div>
     </section>
 
-    <!-- Contact & Center Section (COMBINED) -->
+    <!-- Contact & Center Section -->
     <section class="contact section-padding" id="contact">
         <div class="container">
             <div class="section-title">
@@ -1686,6 +1740,13 @@
                         <a href="https://maps.app.goo.gl/Ut4w2on35hPFNnb67" target="_blank" class="directions-btn">
                             <i class="fas fa-directions"></i> Get Directions
                         </a>
+                    </div>
+                    
+                    <!-- Mobile Contact Button -->
+                    <div class="show-form-mobile">
+                        <button class="btn" id="showFormMobile">
+                            <i class="fas fa-calendar-alt"></i> Need Appointment? Contact Us
+                        </button>
                     </div>
                 </div>
                 
@@ -1769,191 +1830,11 @@
             <div class="copyright">
                 <p>&copy; 2026 Trading Wolf Academy. All Rights Reserved.</p>
                 <div class="creator-credit">
-    <span class="typing-text" id="typingText"></span>
-    <a href="https://ariartech.com" target="_blank" class="ariar-link" id="ariarLink">
-       👉 Ariar Technologies
-    </a>
-</div>
-
-<style>
-.creator-credit {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.typing-text {
-    font-size: 0.9rem;
-    color: #f7931a;
-    min-height: 25px;
-    text-align: center;
-}
-
-.ariar-link {
-    display: inline-block;
-    padding: 10px 25px;
-   background: linear-gradient(135deg, white 0%, #f9fafb 100%);
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.ariar-link:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-}
-
-.ariar-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s;
-}
-
-.ariar-link:hover::before {
-    left: 100%;
-}
-
-.ariar-link i {
-    margin-right: 8px;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .ariar-link {
-        padding: 8px 20px;
-        font-size: 0.9rem;
-    }
-    
-    .typing-text {
-        font-size: 0.85rem;
-    }
-}
-</style>
-
-<script>
-// Typing animation for the credit text
-const texts = [
-    "💻 Crafted with code & passion",
-    "⚡ Powered by cutting-edge tech",
-    "📱 100% Responsive Design",
-    "🎨 UI/UX Excellence",
-    "🚀 Performance Optimized"
-];
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingSpeed = 50;
-const deletingSpeed = 30;
-const pauseTime = 1500;
-
-function typeEffect() {
-    const typingElement = document.getElementById('typingText');
-    const currentText = texts[textIndex];
-    
-    if (!isDeleting) {
-        // Typing forward
-        typingElement.textContent = currentText.substring(0, charIndex + 1);
-        charIndex++;
-        
-        if (charIndex === currentText.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, pauseTime);
-            return;
-        }
-    } else {
-        // Deleting backward
-        typingElement.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        
-        if (charIndex === 0) {
-            isDeleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-        }
-    }
-    
-    setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-}
-
-// Start typing effect when page loads
-window.addEventListener('load', () => {
-    setTimeout(typeEffect, 1000);
-    
-    // Add click animation to Ariar link
-    const ariarLink = document.getElementById('ariarLink');
-    
-    ariarLink.addEventListener('click', function(e) {
-        // Add a quick animation before redirect
-        this.style.transform = 'scale(0.95)';
-        this.style.backgroundColor = '#764ba2';
-        
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            width: ${size}px;
-            height: ${size}px;
-            top: ${y}px;
-            left: ${x}px;
-        `;
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-    
-    // Add keyboard shortcut (Ctrl/Cmd + A) to open Ariar site
-    document.addEventListener('keydown', function(e) {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
-            e.preventDefault();
-            window.open('https://ariartech.com', '_blank');
-        }
-    });
-});
-
-// Add CSS for ripple animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-</script>
+                    <div class="typing-text" id="typingText"></div>
+                    <a href="https://ariartech.com" target="_blank" class="ariar-link" id="ariarLink">
+                        👉 Ariar Technologies
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -2007,11 +1888,11 @@ document.head.appendChild(style);
     <script>
         // Bismillah - Trading Wolf Academy - FINAL PERFECTED VERSION
         
-        // EmailJS Configuration - USING YOUR CREDENTIALS
+        // EmailJS Configuration
         const EMAILJS_CONFIG = {
-            USER_ID: "tKuHojZNFDPOeKcFF",           // Your Public Key
-            SERVICE_ID: "service_67m4g5j",          // Your Service ID
-            TEMPLATE_ID: "template_abgfytj"         // Your Template ID
+            USER_ID: "tKuHojZNFDPOeKcFF",
+            SERVICE_ID: "service_67m4g5j",
+            TEMPLATE_ID: "template_abgfytj"
         };
         
         // Initialize EmailJS
@@ -2038,6 +1919,9 @@ document.head.appendChild(style);
         const loadingOverlay = document.getElementById('loadingOverlay');
         const downloadBrochureBtn = document.getElementById('downloadBrochure');
         const stockTicker = document.getElementById('stockTicker');
+        const showFormMobileBtn = document.getElementById('showFormMobile');
+        const typingElement = document.getElementById('typingText');
+        const ariarLink = document.getElementById('ariarLink');
         
         // Initialize on DOM Load
         document.addEventListener('DOMContentLoaded', function() {
@@ -2047,11 +1931,10 @@ document.head.appendChild(style);
             initModalHandlers();
             initFormHandlers();
             initNotificationSystem();
+            initTypingEffect();
+            initMobileContact();
             
-            // Debug info
             console.log("🚀 Website loaded successfully");
-            console.log("📧 EmailJS configured:", EMAILJS_CONFIG.SERVICE_ID ? "Yes" : "No");
-            console.log("📱 Responsive design: Active");
         });
         
         // ========== MOBILE MENU FUNCTIONS ==========
@@ -2163,7 +2046,6 @@ document.head.appendChild(style);
         
         // ========== MODAL FUNCTIONS ==========
         function initModalHandlers() {
-            // Open enrollment modal
             function openEnrollmentModal(course = '') {
                 if (course) {
                     document.getElementById('modal-course').value = course;
@@ -2172,7 +2054,6 @@ document.head.appendChild(style);
                 document.body.style.overflow = 'hidden';
             }
             
-            // Set up enroll button handlers
             desktopEnrollButton.addEventListener('click', () => openEnrollmentModal());
             mobileEnrollButton.addEventListener('click', () => openEnrollmentModal());
             heroEnrollButton.addEventListener('click', () => openEnrollmentModal());
@@ -2184,17 +2065,14 @@ document.head.appendChild(style);
                 });
             });
             
-            // Close modal
             closeModal.addEventListener('click', closeEnrollmentModal);
             
-            // Close modal on overlay click
             enrollmentModal.addEventListener('click', function(e) {
                 if (e.target === enrollmentModal) {
                     closeEnrollmentModal();
                 }
             });
             
-            // Close modal on escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && enrollmentModal.classList.contains('active')) {
                     closeEnrollmentModal();
@@ -2209,11 +2087,9 @@ document.head.appendChild(style);
         
         // ========== FORM HANDLING FUNCTIONS ==========
         function initFormHandlers() {
-            // Enrollment form submission
             enrollmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Get form data
                 const formData = {
                     name: document.getElementById('modal-name').value.trim(),
                     phone: document.getElementById('modal-phone').value.trim(),
@@ -2223,19 +2099,14 @@ document.head.appendChild(style);
                     form_type: 'Enrollment Form'
                 };
                 
-                // Validation
                 if (!validateForm(formData, ['name', 'phone', 'email', 'course'])) {
                     return;
                 }
                 
-                // Show loading
                 showLoading();
-                
-                // Send email via EmailJS
                 sendEmail(formData, 'Enrollment request submitted successfully!');
             });
             
-            // Appointment/Callback form submission
             appointmentForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -2249,19 +2120,14 @@ document.head.appendChild(style);
                     form_type: 'Appointment/Callback Request'
                 };
                 
-                // Validation
                 if (!validateForm(formData, ['name', 'phone', 'purpose'])) {
                     return;
                 }
                 
-                // Show loading
                 showLoading();
-                
-                // Send email via EmailJS
                 sendEmail(formData, 'Request submitted successfully! We will contact you shortly.');
             });
             
-            // Download brochure button
             downloadBrochureBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 showLoading();
@@ -2270,7 +2136,6 @@ document.head.appendChild(style);
                     hideLoading();
                     showNotification('📄 Brochure download has started. Check your downloads folder!', 'success');
                     
-                    // Create a fake download
                     const link = document.createElement('a');
                     link.href = '#';
                     link.download = 'Trading-Wolf-Academy-Brochure.pdf';
@@ -2283,7 +2148,6 @@ document.head.appendChild(style);
         
         // ========== EMAILJS FUNCTIONS ==========
         function sendEmail(formData, successMessage) {
-            // Prepare email data - matches your template variables
             const emailData = {
                 name: formData.name,
                 phone: formData.phone,
@@ -2295,9 +2159,6 @@ document.head.appendChild(style);
                 title: formData.form_type
             };
             
-            console.log('📧 Sending email data:', emailData);
-            
-            // Send email via EmailJS
             emailjs.send(
                 EMAILJS_CONFIG.SERVICE_ID,
                 EMAILJS_CONFIG.TEMPLATE_ID,
@@ -2308,18 +2169,13 @@ document.head.appendChild(style);
                 hideLoading();
                 showNotification('✅ ' + successMessage, 'success');
                 
-                // Reset forms
                 enrollmentForm.reset();
                 appointmentForm.reset();
-                
-                // Close modal if open
                 closeEnrollmentModal();
             }, function(error) {
                 console.error('❌ Email sending failed:', error);
-                console.error('🔍 Error details:', error.text || error.message);
                 hideLoading();
                 
-                // User-friendly error message
                 let errorMsg = 'Failed to send request. ';
                 if (error.text && error.text.includes('400')) {
                     errorMsg = 'Please check your internet connection and try again.';
@@ -2335,7 +2191,6 @@ document.head.appendChild(style);
         
         // ========== FORM VALIDATION ==========
         function validateForm(formData, requiredFields) {
-            // Check required fields
             for (const field of requiredFields) {
                 if (!formData[field]) {
                     showNotification(`Please fill in the ${field.replace('_', ' ')} field.`, 'error');
@@ -2343,13 +2198,11 @@ document.head.appendChild(style);
                 }
             }
             
-            // Phone validation
             if (formData.phone && !/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
                 showNotification('Please enter a valid 10-digit phone number.', 'error');
                 return false;
             }
             
-            // Email validation
             if (formData.email && formData.email !== 'Not provided') {
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
                     showNotification('Please enter a valid email address.', 'error');
@@ -2366,7 +2219,6 @@ document.head.appendChild(style);
                 notification.classList.remove('show');
             });
             
-            // Auto-hide notifications after 5 seconds
             notification.addEventListener('animationend', function() {
                 if (notification.classList.contains('show')) {
                     setTimeout(() => {
@@ -2380,7 +2232,6 @@ document.head.appendChild(style);
             const notificationContent = document.querySelector('.notification-content');
             notificationContent.textContent = message;
             
-            // Reset and show notification
             notification.className = 'notification';
             notification.classList.add(type, 'show');
         }
@@ -2394,8 +2245,194 @@ document.head.appendChild(style);
             loadingOverlay.classList.remove('active');
         }
         
+        // ========== TYPING EFFECT FOR DEVELOPER CREDIT ==========
+        function initTypingEffect() {
+            const texts = [
+                "💻 Crafted with code & passion",
+                "⚡ Powered by cutting-edge tech",
+                "📱 100% Responsive Design",
+                "🎨 UI/UX Excellence",
+                "🚀 Performance Optimized"
+            ];
+            
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typingSpeed = 50;
+            const deletingSpeed = 30;
+            const pauseTime = 1500;
+            
+            function typeEffect() {
+                const currentText = texts[textIndex];
+                
+                if (!isDeleting) {
+                    typingElement.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    
+                    if (charIndex === currentText.length) {
+                        isDeleting = true;
+                        setTimeout(typeEffect, pauseTime);
+                        return;
+                    }
+                } else {
+                    typingElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        textIndex = (textIndex + 1) % texts.length;
+                    }
+                }
+                
+                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+            }
+            
+            // Start typing effect
+            setTimeout(typeEffect, 1000);
+            
+            // Add ripple effect to Ariar link
+            if (ariarLink) {
+                ariarLink.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.7);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+            
+            // Add ripple animation style
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // ========== MOBILE CONTACT MODAL ==========
+        function initMobileContact() {
+            if (!showFormMobileBtn) return;
+            
+            showFormMobileBtn.addEventListener('click', function() {
+                const mobileContactHTML = `
+                    <div class="mobile-contact-modal" style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.9);
+                        z-index: 2001;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 20px;
+                    ">
+                        <div style="
+                            background: white;
+                            padding: 30px;
+                            border-radius: 15px;
+                            width: 100%;
+                            max-width: 500px;
+                            max-height: 90vh;
+                            overflow-y: auto;
+                        ">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <h3 style="color: var(--secondary);">Contact Options</h3>
+                                <button id="closeMobileContact" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+                            </div>
+                            
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-phone"></i> Quick Contact</h4>
+                                <p style="margin-bottom: 10px;"><strong>Call:</strong> +91-7338377942</p>
+                                <p style="margin-bottom: 10px;"><strong>WhatsApp:</strong> +91-7338377942</p>
+                                <p><strong>Email:</strong> tradingwolfacademy786@gmail.com</p>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-envelope"></i> Send Quick Message</h4>
+                                <form id="mobileQuickForm" style="margin-top: 20px;">
+                                    <div style="margin-bottom: 15px;">
+                                        <input type="text" placeholder="Your Name" required 
+                                               style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                                    </div>
+                                    <div style="margin-bottom: 15px;">
+                                        <input type="tel" placeholder="Phone Number" required 
+                                               style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <textarea placeholder="Your Message" rows="3"
+                                                  style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', mobileContactHTML);
+                
+                document.getElementById('closeMobileContact').addEventListener('click', function() {
+                    document.querySelector('.mobile-contact-modal').remove();
+                });
+                
+                document.getElementById('mobileQuickForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = this.querySelector('input[type="text"]').value;
+                    const phone = this.querySelector('input[type="tel"]').value;
+                    const message = this.querySelector('textarea').value;
+                    
+                    showLoading();
+                    
+                    const formData = {
+                        name: name,
+                        phone: phone,
+                        email: 'Mobile User',
+                        message: message,
+                        form_type: 'Mobile Quick Contact'
+                    };
+                    
+                    sendEmail(formData, 'Message sent! We will contact you shortly.');
+                    
+                    setTimeout(() => {
+                        document.querySelector('.mobile-contact-modal')?.remove();
+                    }, 2000);
+                });
+                
+                document.querySelector('.mobile-contact-modal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.remove();
+                    }
+                });
+            });
+        }
+        
         // ========== ADDITIONAL ENHANCEMENTS ==========
-        // Header shadow on scroll
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
@@ -2430,10 +2467,8 @@ document.head.appendChild(style);
             });
         }
         
-        // Initialize animations when page loads
         window.addEventListener('load', animateOnScroll);
         
-        // Form input validation styling
         document.querySelectorAll('input, select, textarea').forEach(input => {
             input.addEventListener('blur', function() {
                 if (this.value.trim() === '' && this.hasAttribute('required')) {
@@ -2447,32 +2482,6 @@ document.head.appendChild(style);
                 this.style.borderColor = '#ddd';
             });
         });
-        
-        // Test EmailJS connection (optional - remove in production)
-        function testEmailJS() {
-            console.log("🧪 Testing EmailJS connection...");
-            
-            const testData = {
-                name: "Test User",
-                phone: "9876543210",
-                email: "test@test.com",
-                course: "Testing",
-                message: "This is a test email",
-                form_type: "Test",
-                title: "Test Form"
-            };
-            
-            emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, testData)
-                .then(function(response) {
-                    console.log('✅ Test email SUCCESS!', response);
-                })
-                .catch(function(error) {
-                    console.error('❌ Test email FAILED:', error);
-                });
-        }
-        
-        // Uncomment to test on page load
-        // setTimeout(testEmailJS, 3000);
     </script>
 </body>
 </html>
