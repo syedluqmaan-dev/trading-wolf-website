@@ -6,8 +6,9 @@
     <title>Trading Wolf Academy - Best Stock Market Education</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        /* Bismillah - Trading Wolf Academy */
+        /* Bismillah - Trading Wolf Academy - PERFECTED FINAL VERSION */
         :root {
             --primary: #f7931a;
             --primary-dark: #d97e08;
@@ -26,14 +27,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            font-family: 'Poppins', sans-serif;
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
             background-color: #fefefe;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
         }
 
         .container {
@@ -43,85 +53,68 @@
             padding: 0 20px;
         }
 
-        /* Notification Messages */
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 8px;
+        /* ========== UTILITY CLASSES ========== */
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 { margin-top: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .mt-40 { margin-top: 40px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mb-30 { margin-bottom: 30px; }
+        .mb-40 { margin-bottom: 40px; }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            font-weight: 600;
-            z-index: 9999;
-            transform: translateX(400px);
-            transition: transform 0.4s ease;
-            max-width: 350px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success {
-            background: linear-gradient(135deg, var(--accent-green), #0da271);
-            border-left: 4px solid #059669;
-        }
-
-        .notification.error {
-            background: linear-gradient(135deg, var(--accent-red), #dc2626);
-            border-left: 4px solid #b91c1c;
-        }
-
-        .notification .close-notif {
-            background: none;
             border: none;
-            color: white;
-            font-size: 1.2rem;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            opacity: 0.8;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
+            font-family: 'Poppins', sans-serif;
         }
 
-        .notification .close-notif:hover {
-            opacity: 1;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(247, 147, 26, 0.4);
         }
 
-        /* Loading Overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-block {
+            display: block;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9998;
         }
 
-        .loading-overlay.active {
-            display: flex;
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 0.9rem;
         }
 
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Header Styles */
+        /* ========== HEADER ========== */
         header {
             background-color: white;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -138,16 +131,37 @@
             align-items: center;
         }
 
-        .logo-container {
+        .logo {
             display: flex;
             align-items: center;
             gap: 15px;
+            text-decoration: none;
+        }
+
+        /* LOGO PERFECT SIZE AND FIT */
+        .logo-img-box {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 8px;
         }
 
         .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Text logo fallback */
+        .logo-icon {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -157,11 +171,15 @@
             font-size: 1.8rem;
         }
 
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
         .logo-text h1 {
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--secondary);
-            font-family: 'Montserrat', sans-serif;
             line-height: 1.2;
         }
 
@@ -176,20 +194,20 @@
             display: block;
         }
 
-        /* Desktop Navigation */
+        /* ========== NAVIGATION ========== */
         .desktop-nav {
             display: flex;
             align-items: center;
             gap: 25px;
         }
 
-        .desktop-nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
             gap: 25px;
         }
 
-        .desktop-nav ul li a {
+        .nav-links li a {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
@@ -199,11 +217,11 @@
             position: relative;
         }
 
-        .desktop-nav ul li a:hover {
+        .nav-links li a:hover {
             color: var(--primary);
         }
 
-        .desktop-nav ul li a::after {
+        .nav-links li a::after {
             content: '';
             position: absolute;
             width: 0;
@@ -214,34 +232,11 @@
             transition: width 0.3s;
         }
 
-        .desktop-nav ul li a:hover::after {
+        .nav-links li a:hover::after {
             width: 100%;
         }
 
-        /* Desktop CTA Button */
-        .desktop-cta {
-            display: block;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(247, 147, 26, 0.4);
-        }
-
-        /* Mobile Menu Button */
+        /* ========== MOBILE MENU ========== */
         .mobile-menu-btn {
             display: none;
             font-size: 1.5rem;
@@ -252,7 +247,21 @@
             padding: 8px;
         }
 
-        /* Mobile Navigation */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .mobile-nav-overlay.active {
+            display: block;
+        }
+
         .mobile-nav {
             position: fixed;
             top: 0;
@@ -269,21 +278,6 @@
 
         .mobile-nav.active {
             right: 0;
-        }
-
-        .mobile-nav-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            display: none;
-        }
-
-        .mobile-nav-overlay.active {
-            display: block;
         }
 
         .mobile-nav-header {
@@ -332,20 +326,13 @@
             padding-left: 20px;
         }
 
-        .mobile-nav .cta-button {
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-        }
-
-        /* Hero Section */
+        /* ========== HERO SECTION ========== */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
                         url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: scroll; /* Fix for iOS */
             color: white;
             padding: 180px 0 140px;
             text-align: center;
@@ -353,11 +340,25 @@
             position: relative;
         }
 
+        /* Fallback for iOS */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                background-attachment: scroll !important;
+                background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                            url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') no-repeat center center;
+                background-size: cover;
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .hero h2 {
             font-size: 3.2rem;
             margin-bottom: 20px;
             font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             line-height: 1.2;
         }
@@ -386,36 +387,17 @@
             margin-top: 30px;
         }
 
-        .hero-buttons .cta-button {
-            padding: 16px 35px;
-            font-size: 1.1rem;
-            border-radius: 10px;
-        }
-
-        .secondary-button {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            box-shadow: none;
-        }
-
-        .secondary-button:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Stock Ticker */
+        /* ========== STOCK TICKER ========== */
         .ticker-container {
-            position: relative;
+            position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
             background: rgba(0, 0, 0, 0.85);
             overflow: hidden;
-            height: 50px;
+            height: 60px;
             display: flex;
             align-items: center;
-            margin-top: 30px;
         }
 
         .ticker {
@@ -423,7 +405,6 @@
             animation: ticker-scroll 40s linear infinite;
             white-space: nowrap;
             padding: 0 20px;
-            will-change: transform;
         }
 
         .ticker-item {
@@ -474,9 +455,8 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Courses Section */
+        /* ========== COURSES SECTION ========== */
         .courses {
-            padding: 100px 0;
             background-color: var(--light);
         }
 
@@ -489,8 +469,6 @@
             font-size: 2.8rem;
             color: var(--secondary);
             margin-bottom: 15px;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
             position: relative;
             display: inline-block;
         }
@@ -528,7 +506,7 @@
             text-align: center;
             box-shadow: var(--card-shadow);
             transition: var(--transition);
-            border: 1px solid #f0f0f0;
+            border: 1px solid transparent;
             position: relative;
             overflow: hidden;
         }
@@ -536,6 +514,7 @@
         .course-card:hover {
             transform: translateY(-15px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
         }
 
         .course-card::before {
@@ -558,7 +537,6 @@
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--secondary);
-            font-weight: 700;
         }
 
         .course-card p {
@@ -567,12 +545,7 @@
             line-height: 1.7;
         }
 
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background-color: white;
-        }
-
+        /* ========== ABOUT SECTION ========== */
         .about-content {
             display: flex;
             align-items: center;
@@ -587,8 +560,6 @@
             font-size: 2.8rem;
             color: var(--secondary);
             margin-bottom: 25px;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .about-text p {
@@ -609,18 +580,22 @@
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s ease;
         }
 
-        /* Benefits */
+        .about-image img:hover {
+            transform: scale(1.03);
+        }
+
         .benefits {
-            padding: 80px 0 60px;
-            background-color: white;
+            margin-top: 40px;
         }
 
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
+            margin-top: 30px;
         }
 
         .benefit-card {
@@ -636,6 +611,7 @@
             background-color: white;
             border-color: var(--primary);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
         }
 
         .benefit-icon {
@@ -648,12 +624,10 @@
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--secondary);
-            font-weight: 700;
         }
 
-        /* Trainer Section */
+        /* ========== TRAINER SECTION ========== */
         .trainer {
-            padding: 100px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
 
@@ -680,19 +654,10 @@
             flex: 1;
         }
 
-        .trainer-text h2 {
-            font-size: 2.8rem;
-            color: var(--secondary);
-            margin-bottom: 20px;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
-        }
-
         .trainer-text h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary);
             margin-bottom: 10px;
-            font-weight: 700;
         }
 
         .trainer-text h4 {
@@ -726,19 +691,17 @@
             border: 1px solid #eee;
         }
 
-        /* Trust Section */
+        /* ========== TRUST SECTION ========== */
         .trust {
-            padding: 80px 0;
             background-color: var(--secondary);
             color: white;
             text-align: center;
+            padding: 80px 0;
         }
 
         .trust h2 {
             font-size: 2.8rem;
             margin-bottom: 15px;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .trust p {
@@ -748,9 +711,8 @@
             opacity: 0.9;
         }
 
-        /* Steps Section */
+        /* ========== STEPS SECTION ========== */
         .apply-steps {
-            padding: 100px 0;
             background-color: var(--light);
         }
 
@@ -782,7 +744,6 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border-radius: 50%;
-            line-height: 60px;
             font-size: 1.8rem;
             font-weight: 800;
             margin-bottom: 25px;
@@ -799,10 +760,9 @@
             line-height: 1.7;
         }
 
-        /* Contact Section */
+        /* ========== CONTACT SECTION (NOW CENTER + CONTACT COMBINED) ========== */
         .contact {
-            padding: 100px 0;
-            background-color: white;
+            background-color: var(--light);
         }
 
         .contact-content {
@@ -818,8 +778,6 @@
             font-size: 2.8rem;
             color: var(--secondary);
             margin-bottom: 30px;
-            font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .contact-details {
@@ -836,18 +794,61 @@
             color: var(--gray);
             margin-bottom: 10px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
         }
 
         .contact-details i {
             color: var(--primary);
             width: 20px;
+            margin-top: 3px;
+        }
+
+        /* MAP CONTAINER - FIXED WITH DIRECTIONS BUTTON */
+        .map-container {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            display: block;
+        }
+
+        .directions-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .directions-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
 
         .contact-form {
             flex: 1;
-            background-color: var(--light);
+            background-color: white;
             padding: 40px;
             border-radius: 15px;
             box-shadow: var(--card-shadow);
@@ -873,6 +874,7 @@
             border-radius: 8px;
             font-size: 1rem;
             transition: border 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
 
         .form-group input:focus,
@@ -880,6 +882,7 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.1);
         }
 
         .form-group textarea {
@@ -887,7 +890,7 @@
             resize: vertical;
         }
 
-        /* Modal - UPDATED FOR PERFECT SIZE */
+        /* ========== MODAL ========== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -900,7 +903,6 @@
             align-items: center;
             z-index: 2000;
             padding: 20px;
-            overflow-y: auto;
         }
 
         .modal-overlay.active {
@@ -938,10 +940,6 @@
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--light-gray);
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1;
         }
 
         .modal-header h3 {
@@ -971,75 +969,7 @@
             color: var(--accent-red);
         }
 
-        /* Form inside modal */
-        .modal .form-group {
-            margin-bottom: 20px;
-        }
-
-        .modal .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--secondary);
-            font-size: 0.95rem;
-        }
-
-        .modal .form-group input,
-        .modal .form-group select,
-        .modal .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: var(--transition);
-            background-color: white;
-        }
-
-        .modal .form-group input:focus,
-        .modal .form-group select:focus,
-        .modal .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(247, 147, 26, 0.1);
-        }
-
-        .modal .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Submit button in modal */
-        .modal .cta-button {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-top: 10px;
-            border-radius: 10px;
-        }
-
-        /* Scrollbar styling for modal */
-        .modal::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .modal::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .modal::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Footer */
+        /* ========== FOOTER ========== */
         footer {
             background-color: #111;
             color: white;
@@ -1050,12 +980,13 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
         .footer-logo h2 {
             font-size: 1.8rem;
             margin-bottom: 10px;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .footer-logo span {
@@ -1139,93 +1070,182 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1100px) {
-            .courses-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        /* ========== LOADING & NOTIFICATION ========== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9998;
         }
 
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 9999;
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, var(--accent-green), #0da271);
+            border-left: 4px solid #059669;
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, var(--accent-red), #dc2626);
+            border-left: 4px solid #b91c1c;
+        }
+
+        .notification .close-notif {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .notification .close-notif:hover {
+            opacity: 1;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        /* Tablet: 768px to 992px */
         @media (max-width: 992px) {
-            .about-content,
-            .trainer-content,
-            .contact-content {
-                flex-direction: column;
-            }
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-            .hero .tagline {
-                font-size: 1.5rem;
-            }
-            
-            /* Hide desktop nav and show mobile menu button */
             .desktop-nav {
                 display: none;
             }
+            
             .mobile-menu-btn {
                 display: block;
             }
             
-            /* Adjust hero margin for mobile */
             .hero {
                 margin-top: 75px;
                 padding: 150px 0 110px;
             }
             
-            /* Ticker positioning for mobile */
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .tagline {
+                font-size: 1.5rem;
+            }
+            
+            .about-content,
+            .trainer-content,
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
             .ticker-container {
                 position: relative;
-                margin-top: 25px;
+                margin-top: 30px;
             }
-
-            /* Modal responsive for tablet */
-            .modal {
-                max-width: 90%;
-                max-height: 85vh;
-                margin: 20px;
+            
+            .logo-img-box,
+            .logo-icon {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.6rem;
             }
         }
 
+        /* Mobile: 768px and below */
         @media (max-width: 768px) {
             .hero {
                 padding: 130px 0 100px;
             }
+            
             .hero h2 {
                 font-size: 2.2rem;
             }
+            
             .hero .tagline {
                 font-size: 1.3rem;
             }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                gap: 15px;
             }
+            
             .courses-grid,
             .benefits-grid {
                 grid-template-columns: 1fr;
             }
+            
             .steps-grid {
                 grid-template-columns: 1fr;
             }
+            
             .section-title h2 {
                 font-size: 2.2rem;
             }
+            
+            .mobile-nav {
+                width: 85%;
+                max-width: 300px;
+            }
+            
             .footer-content {
                 flex-direction: column;
                 gap: 30px;
-            }
-            
-            /* MOBILE TICKER FIXES */
-            .ticker-container {
-                height: 45px;
-                margin-top: 25px;
             }
             
             .ticker-item {
@@ -1235,12 +1255,10 @@
             
             .ticker-symbol {
                 min-width: 90px;
-                font-size: 0.9rem;
             }
             
             .ticker-price {
                 min-width: 70px;
-                font-size: 0.9rem;
             }
             
             .ticker-change {
@@ -1252,72 +1270,51 @@
                 animation: ticker-scroll 30s linear infinite;
             }
             
-            .mobile-nav {
-                width: 85%;
-                max-width: 300px;
-            }
-
-            /* Modal responsive for mobile */
-            .modal {
-                padding: 25px 20px;
+            .contact-form {
+                padding: 30px 20px;
             }
             
-            .modal-header {
-                margin-bottom: 20px;
-                padding-bottom: 12px;
+            .logo-img-box,
+            .logo-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
             
-            .modal-header h3 {
+            .logo-text h1 {
                 font-size: 1.4rem;
             }
             
-            .modal .form-group {
-                margin-bottom: 18px;
-            }
-            
-            .modal .form-group input,
-            .modal .form-group select,
-            .modal .form-group textarea {
-                padding: 12px 14px;
-                font-size: 0.95rem;
-            }
-            
-            .modal .form-group textarea {
-                min-height: 100px;
-            }
-            
-            .modal .cta-button {
-                padding: 14px;
-                font-size: 1rem;
+            .logo-text .tagline {
+                font-size: 0.75rem;
             }
         }
 
+        /* Small Mobile: 480px and below */
         @media (max-width: 480px) {
             .hero {
                 padding: 110px 0 80px;
             }
+            
             .hero h2 {
                 font-size: 1.8rem;
             }
+            
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+            
             .section-title h2 {
                 font-size: 1.8rem;
             }
+            
             .contact-form {
-                padding: 30px 20px;
-            }
-            .logo-text h1 {
-                font-size: 1.5rem;
-            }
-            .logo-img {
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
+                padding: 25px 15px;
             }
             
-            /* SMALL MOBILE TICKER FIXES */
-            .ticker-container {
-                height: 40px;
-                margin-top: 20px;
+            .modal {
+                padding: 25px 20px;
+                margin: 10px;
             }
             
             .ticker-item {
@@ -1327,76 +1324,36 @@
             
             .ticker-symbol {
                 min-width: 80px;
-                font-size: 0.85rem;
             }
             
             .ticker-price {
                 min-width: 60px;
-                font-size: 0.85rem;
-            }
-            
-            .ticker-change {
-                font-size: 0.8rem;
-                padding: 2px 6px;
             }
             
             .ticker {
                 animation: ticker-scroll 25s linear infinite;
             }
-
-            /* Modal responsive for small mobile */
-            .modal {
-                padding: 20px 16px;
-                max-width: 95%;
-                max-height: 80vh;
-                margin: 10px;
-                border-radius: 12px;
-            }
             
-            .modal-header h3 {
-                font-size: 1.3rem;
-            }
-            
-            .modal .form-group {
-                margin-bottom: 16px;
-            }
-            
-            .modal .form-group label {
-                font-size: 0.9rem;
-            }
-            
-            .modal .form-group input,
-            .modal .form-group select,
-            .modal .form-group textarea {
-                padding: 11px 13px;
-                font-size: 0.9rem;
-            }
-            
-            .modal .form-group textarea {
-                min-height: 90px;
-            }
-            
-            .close-modal {
-                width: 32px;
-                height: 32px;
-                font-size: 1.3rem;
+            .directions-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                bottom: 10px;
+                right: 10px;
             }
         }
 
+        /* Extra Small Mobile: 360px and below */
         @media (max-width: 360px) {
             .logo-text h1 {
-                font-size: 1.3rem;
-            }
-            .logo-text .tagline {
-                font-size: 0.7rem;
-            }
-            .mobile-nav {
-                width: 90%;
+                font-size: 1.2rem;
             }
             
-            /* EXTRA SMALL MOBILE TICKER */
-            .ticker-container {
-                height: 35px;
+            .logo-text .tagline {
+                font-size: 0.65rem;
+            }
+            
+            .mobile-nav {
+                width: 90%;
             }
             
             .ticker-item {
@@ -1406,47 +1363,21 @@
             
             .ticker-symbol {
                 min-width: 70px;
-                font-size: 0.75rem;
             }
             
             .ticker-price {
                 min-width: 50px;
-                font-size: 0.75rem;
             }
             
-            .ticker-change {
-                font-size: 0.7rem;
-                padding: 1px 4px;
-            }
-
-            /* Modal responsive for extra small mobile */
-            .modal {
-                padding: 18px 14px;
-                border-radius: 10px;
+            .ticker {
+                animation: ticker-scroll 20s linear infinite;
             }
             
-            .modal-header h3 {
-                font-size: 1.2rem;
-            }
-            
-            .modal .form-group input,
-            .modal .form-group select {
-                padding: 10px 12px;
-            }
-        }
-
-        /* Desktop specific ticker fix */
-        @media (min-width: 993px) {
-            .ticker-container {
-                position: absolute;
-                margin-top: 0;
-            }
-        }
-
-        /* Desktop specific modal */
-        @media (min-width: 769px) {
-            .modal {
-                min-width: 450px;
+            .logo-img-box,
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -1457,7 +1388,7 @@
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- Notification System -->
+    <!-- Notification -->
     <div class="notification" id="notification">
         <button class="close-notif">&times;</button>
         <div class="notification-content"></div>
@@ -1466,7 +1397,7 @@
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
-    <!-- Mobile Navigation Sidebar -->
+    <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-header">
             <h3>Menu</h3>
@@ -1479,38 +1410,44 @@
             <li><a href="#courses">Courses</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#trainer">Trainer</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#center">Center</a></li>
+            <li><a href="#contact">Contact & Center</a></li>
         </ul>
-        <!-- Enroll button inside mobile nav -->
-        <button class="cta-button" id="mobileEnrollButton">Enroll Now</button>
+        <button class="btn btn-block mt-20" id="mobileEnrollButton">Enroll Now</button>
     </div>
 
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <div class="logo-container">
-                <div class="logo-img">TW</div>
+            <a href="#home" class="logo">
+                <!-- Option 1: Upload your logo to assets/logo.png -->
+                <!--
+                <div class="logo-img-box">
+                    <img src="assets/logo.png" alt="Trading Wolf Academy Logo" class="logo-img">
+                </div>
+                -->
+                
+                <!-- Option 2: Text logo (Currently active) -->
+                <div class="logo-img-box">
+        <img src="assests/logo1.jpeg" alt="Trading Wolf Academy Logo" class="logo-img">
+    </div>
                 <div class="logo-text">
-                    <h1>Trading <span>Wolf Academy</span></h1>
+                    <h1>Trading Wolf <span> Academy</span></h1>
                     <span class="tagline">Master the Market with Confidence</span>
                 </div>
-            </div>
+            </a>
             
             <!-- Desktop Navigation -->
             <div class="desktop-nav">
                 <nav>
-                    <ul>
+                    <ul class="nav-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#courses">Courses</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#trainer">Trainer</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#center">Center</a></li>
+                        <li><a href="#contact">Contact & Center</a></li>
                     </ul>
                 </nav>
-                <!-- Enroll button -->
-                <button class="cta-button desktop-cta" id="desktopEnrollButton">Enroll Now</button>
+                <button class="btn" id="desktopEnrollButton">Enroll Now</button>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -1523,12 +1460,14 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h2>Trading Wolf Academy</h2>
-            <div class="tagline">Transform Your Trading Journey with Expert-Led Education</div>
-            <p>Master the art of trading with our structured programs designed for beginners and experienced traders alike. Build confidence, develop discipline, and achieve consistent profitability.</p>
-            <div class="hero-buttons">
-                <button class="cta-button" id="heroEnrollButton">Start Learning Today</button>
-                <button class="cta-button secondary-button" id="downloadBrochure">Download Brochure</button>
+            <div class="hero-content">
+                <h2>Trading Wolf Academy</h2>
+                <div class="tagline">Transform Your Trading Journey with Expert-Led Education</div>
+                <p>Master the art of trading with our structured programs designed for beginners and experienced traders alike. Build confidence, develop discipline, and achieve consistent profitability.</p>
+                <div class="hero-buttons">
+                    <button class="btn" id="heroEnrollButton">Start Learning Today</button>
+                    <button class="btn btn-secondary" id="downloadBrochure">Download Brochure</button>
+                </div>
             </div>
         </div>
         
@@ -1539,7 +1478,7 @@
     </section>
 
     <!-- Courses Section -->
-    <section class="courses" id="courses">
+    <section class="courses section-padding" id="courses">
         <div class="container">
             <div class="section-title">
                 <h2>COURSES OFFERED</h2>
@@ -1551,49 +1490,49 @@
                     <div class="course-icon"><i class="fas fa-chart-line"></i></div>
                     <h3>Equity Investment & Trading</h3>
                     <p>From basics to advanced strategies for equity markets. Learn fundamental analysis, technical analysis, and risk management for long-term wealth creation.</p>
-                    <button class="cta-button enroll-course" data-course="Equity Investment & Trading">Enroll Now</button>
+                    <button class="btn enroll-course" data-course="Equity Investment & Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-exchange-alt"></i></div>
                     <h3>F&O Trading</h3>
                     <p>Master Futures & Options trading with proven strategies. Learn option Greeks, strategies for different market conditions, and risk management techniques.</p>
-                    <button class="cta-button enroll-course" data-course="F&O Trading">Enroll Now</button>
+                    <button class="btn enroll-course" data-course="F&O Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-gas-pump"></i></div>
                     <h3>Commodity Trading</h3>
                     <p>Learn to trade gold, silver, crude oil, and agricultural commodities. Understand global factors affecting prices and develop commodity-specific strategies.</p>
-                    <button class="cta-button enroll-course" data-course="Commodity Trading">Enroll Now</button>
+                    <button class="btn enroll-course" data-course="Commodity Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-briefcase"></i></div>
-                    <h3>Full-Time Trading Career</h3>
-                    <p>Transform trading from a hobby to a full-time profession. Includes capital management, psychology, and building a sustainable trading business.</p>
-                    <button class="cta-button enroll-course" data-course="Full-Time Trading Career">Enroll Now</button>
+                    <h3>Students Career Program</h3>
+                    <p>Our NISM certification program trains students to pass the government-recognized exam and helps them secure placements in stock market companies.</p>
+                    <button class="btn enroll-course" data-course="Students Career Program">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-globe"></i></div>
                     <h3>Forex Market Trading</h3>
                     <p>Master the largest financial market in the world. Learn currency pairs analysis, forex strategies, and risk management for consistent profits.</p>
-                    <button class="cta-button enroll-course" data-course="Forex Market Trading">Enroll Now</button>
+                    <button class="btn enroll-course" data-course="Forex Market Trading">Enroll Now</button>
                 </div>
                 
                 <div class="course-card">
                     <div class="course-icon"><i class="fas fa-user-graduate"></i></div>
                     <h3>Personal Mentorship</h3>
                     <p>One-on-one coaching with expert traders. Customized learning path, live trading sessions, and continuous support for your trading journey.</p>
-                    <button class="cta-button enroll-course" data-course="Personal Mentorship Program">Enroll Now</button>
+                    <button class="btn enroll-course" data-course="Personal Mentorship Program">Enroll Now</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about section-padding" id="about">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
@@ -1604,33 +1543,48 @@
                     <div class="benefits">
                         <h3 style="font-size: 1.8rem; margin-bottom: 25px; color: var(--secondary);">Why Choose Us</h3>
                         <div class="benefits-grid">
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-sync-alt"></i></div><h4>Revision Classes</h4></div>
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-calendar-check"></i></div><h4>3 Months Support</h4></div>
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-star"></i></div><h4>5-Star Trading Setup</h4></div>
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-users"></i></div><h4>Premium Analysis Community</h4></div>
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-brain"></i></div><h4>Trading Psychology Training</h4></div>
-                            <div class="benefit-card"><div class="benefit-icon"><i class="fas fa-clipboard-check"></i></div><h4>Ultimate Trader's Checklist</h4></div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon"><i class="fas fa-sync-alt"></i></div>
+                                <h4>Revision Classes</h4>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon"><i class="fas fa-calendar-check"></i></div>
+                                <h4>3 Months Support</h4>
+                            </div>
+                        
+                            <div class="benefit-card">
+                                <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                                <h4>Premium Analysis Community</h4>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+                                <h4>Trading Psychology Training</h4>
+                            </div>
+                            <div class="benefit-card">
+                                <div class="benefit-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <h4>Ultimate Trader's Checklist</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Trading Education">
+                    <img src="assests/c.png" alt="Trading Education">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Trainer Section -->
-    <section class="trainer" id="trainer">
+    <section class="trainer section-padding" id="trainer">
         <div class="container">
             <div class="section-title">
                 <h2>Learn From The Expert</h2>
             </div>
             
             <div class="trainer-content">
-                <div class="trainer-image">
+                <!-- <div class="trainer-image">
                     <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Wasim Ahmed - CEO">
-                </div>
+                </div> -->
                 <div class="trainer-text">
                     <h3>Wasim Ahmed</h3>
                     <h4>CEO at Trading Wolf Academy</h4>
@@ -1649,15 +1603,15 @@
     </section>
 
     <!-- Trust Section -->
-    <section class="trust">
+    <section class="trust" id="trust">
         <div class="container">
             <h2>Trusted by Thousands of Learners</h2>
             <p>India's Fastest-Growing Stock Market Education Community</p>
         </div>
     </section>
 
-    <!-- How to Apply Section -->
-    <section class="apply-steps">
+    <!-- Steps Section -->
+    <section class="apply-steps section-padding" id="steps">
         <div class="container">
             <div class="section-title">
                 <h2>How to Apply?</h2>
@@ -1665,67 +1619,116 @@
             </div>
             
             <div class="steps-grid">
-                <div class="step-card"><div class="step-number">1</div><h3>Download Brochure</h3><p>Download our detailed brochure and understand all aspects of our courses.</p></div>
-                <div class="step-card"><div class="step-number">2</div><h3>Register & Enroll</h3><p>Complete the registration process by filling the enrollment form.</p></div>
-                <div class="step-card"><div class="step-number">3</div><h3>Confirmation</h3><p>Send payment confirmation on WhatsApp (+91-7338377942) for verification.</p></div>
-                <div class="step-card"><div class="step-number">4</div><h3>Start Learning</h3><p>Get access to course materials and begin your transformation journey.</p></div>
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Download Brochure</h3>
+                    <p>Download our detailed brochure and understand all aspects of our courses.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Register & Enroll</h3>
+                    <p>Complete the registration process by filling the enrollment form.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Confirmation</h3>
+                    <p>Send payment confirmation on WhatsApp (+91-7338377942) for verification.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Start Learning</h3>
+                    <p>Get access to course materials and begin your transformation journey.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <!-- Contact & Center Section (COMBINED) -->
+    <section class="contact section-padding" id="contact">
         <div class="container">
+            <div class="section-title">
+                <h2>Visit Our Center & Contact Us</h2>
+                <p>Walk in for a one-on-one consultation or schedule an appointment with our experts</p>
+            </div>
+            
             <div class="contact-content">
                 <div class="contact-info">
-                    <h2>Get in Touch</h2>
+                    <h2>Office Details</h2>
                     
                     <div class="contact-details">
-                        <h3>Our Contact Details</h3>
+                        <h3>Location & Contact</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Trading Wolf Academy, 62, 1st Floor, CMR Main Rd, opposite Bangalore Diabetic Center, HRBR Layout 2nd Block, HRBR Layout, Kalyan Nagar, Bengaluru, Karnataka 560043</p>
                         <p><i class="fas fa-phone"></i> +91-7338377942</p>
-                        <p><i class="fas fa-envelope"></i> info@tradingwolfacademy.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Trading Wolf Academy 62, 1st Floor, CMR Main Rd, opposite Bangalore Diabetic Center, HRBR Layout 2nd Block, HRBR Layout, Kalyan Nagar, Bengaluru, Karnataka 560043</p>
+                        <p><i class="fas fa-envelope"></i> tradingwolfacademy786@gmail.com</p>
+                        <p><i class="fas fa-whatsapp"></i> WhatsApp: +91-7338377942</p>
                     </div>
                     
                     <div class="contact-details">
-                        <h3>Working Hours</h3>
+                        <h3>Walk-in Hours</h3>
                         <p><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 8:00 PM</p>
                         <p><i class="fas fa-clock"></i> Saturday: 10:00 AM - 6:00 PM</p>
                         <p><i class="fas fa-clock"></i> Sunday: 10:00 AM - 4:00 PM</p>
+                        <p><i class="fas fa-user-check"></i> One-on-one sessions available by appointment</p>
+                    </div>
+                    
+                    <!-- MAP WITH DIRECTIONS BUTTON -->
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.320022498104!2d77.6382824!3d13.0075379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1126a2d9e34f%3A0x3e8a6a5c5e5b5b5b!2sTrading%20Wolf%20Academy!5e0!3m2!1sen!2sin!4v1703857624935!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Trading Wolf Academy Location Map">
+                        </iframe>
+                        <a href="https://maps.app.goo.gl/Ut4w2on35hPFNnb67" target="_blank" class="directions-btn">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
                     </div>
                 </div>
                 
                 <div class="contact-form">
-                    <h3>Request a Callback</h3>
-                    <form id="contactForm">
+                    <h3>Schedule an Appointment / Request Callback</h3>
+                    <form id="appointmentForm">
                         <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" required>
+                            <label for="appointment-name">Full Name *</label>
+                            <input type="text" id="appointment-name" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" required>
+                            <label for="appointment-phone">Phone Number *</label>
+                            <input type="tel" id="appointment-phone" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email">
+                            <label for="appointment-email">Email Address</label>
+                            <input type="email" id="appointment-email">
                         </div>
                         
                         <div class="form-group">
-                            <label for="course">Course Interested In</label>
-                            <select id="course">
-                                <option value="">Select a course</option>
-                                <option value="Equity Investment & Trading">Equity Investment & Trading</option>
-                                <option value="F&O Trading">F&O Trading</option>
-                                <option value="Commodity Trading">Commodity Trading</option>
-                                <option value="Full-Time Trading Career">Full-Time Trading Career</option>
-                                <option value="Forex Market Trading">Forex Market Trading</option>
+                            <label for="appointment-purpose">Purpose *</label>
+                            <select id="appointment-purpose" required>
+                                <option value="">Select Purpose</option>
+                                <option value="Walk-in Consultation">Walk-in Consultation</option>
+                                <option value="Course Inquiry">Course Inquiry</option>
+                                <option value="One-on-One Session">One-on-One Session</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         
-                        <button type="submit" class="cta-button" style="width: 100%;">Request Callback</button>
+                        <div class="form-group">
+                            <label for="appointment-date">Preferred Date</label>
+                            <input type="date" id="appointment-date">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="appointment-message">Additional Details (Optional)</label>
+                            <textarea id="appointment-message" placeholder="Any specific requirements or questions?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-block">Submit Request</button>
                     </form>
                 </div>
             </div>
@@ -1748,7 +1751,7 @@
                         <li><a href="#courses">Courses</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#trainer">Trainer</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#contact">Contact & Center</a></li>
                     </ul>
                 </div>
                 
@@ -1757,6 +1760,8 @@
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
             </div>
@@ -1764,9 +1769,191 @@
             <div class="copyright">
                 <p>&copy; 2026 Trading Wolf Academy. All Rights Reserved.</p>
                 <div class="creator-credit">
-                    Designed and developed by <a href="https://www.linkedin.com/in/syed-luqmaan-5a124b1" target="_blank">Syed Luqmaan</a> | 
-                    <a href="https://syedluqmaan-portfolio.vercel.app" target="_blank">Click here for more details </a>
-                </div>
+    <span class="typing-text" id="typingText"></span>
+    <a href="https://ariartech.com" target="_blank" class="ariar-link" id="ariarLink">
+       👉 Ariar Technologies
+    </a>
+</div>
+
+<style>
+.creator-credit {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.typing-text {
+    font-size: 0.9rem;
+    color: #f7931a;
+    min-height: 25px;
+    text-align: center;
+}
+
+.ariar-link {
+    display: inline-block;
+    padding: 10px 25px;
+   background: linear-gradient(135deg, white 0%, #f9fafb 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.ariar-link:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.ariar-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.ariar-link:hover::before {
+    left: 100%;
+}
+
+.ariar-link i {
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .ariar-link {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .typing-text {
+        font-size: 0.85rem;
+    }
+}
+</style>
+
+<script>
+// Typing animation for the credit text
+const texts = [
+    "💻 Crafted with code & passion",
+    "⚡ Powered by cutting-edge tech",
+    "📱 100% Responsive Design",
+    "🎨 UI/UX Excellence",
+    "🚀 Performance Optimized"
+];
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingSpeed = 50;
+const deletingSpeed = 30;
+const pauseTime = 1500;
+
+function typeEffect() {
+    const typingElement = document.getElementById('typingText');
+    const currentText = texts[textIndex];
+    
+    if (!isDeleting) {
+        // Typing forward
+        typingElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        
+        if (charIndex === currentText.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, pauseTime);
+            return;
+        }
+    } else {
+        // Deleting backward
+        typingElement.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        
+        if (charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+        }
+    }
+    
+    setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
+}
+
+// Start typing effect when page loads
+window.addEventListener('load', () => {
+    setTimeout(typeEffect, 1000);
+    
+    // Add click animation to Ariar link
+    const ariarLink = document.getElementById('ariarLink');
+    
+    ariarLink.addEventListener('click', function(e) {
+        // Add a quick animation before redirect
+        this.style.transform = 'scale(0.95)';
+        this.style.backgroundColor = '#764ba2';
+        
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            width: ${size}px;
+            height: ${size}px;
+            top: ${y}px;
+            left: ${x}px;
+        `;
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+    
+    // Add keyboard shortcut (Ctrl/Cmd + A) to open Ariar site
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+            e.preventDefault();
+            window.open('https://ariartech.com', '_blank');
+        }
+    });
+});
+
+// Add CSS for ripple animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+</script>
             </div>
         </div>
     </footer>
@@ -1801,7 +1988,7 @@
                         <option value="Equity Investment & Trading">Equity Investment & Trading</option>
                         <option value="F&O Trading">F&O Trading</option>
                         <option value="Commodity Trading">Commodity Trading</option>
-                        <option value="Full-Time Trading Career">Full-Time Trading Career</option>
+                        <option value="Students Career Program">Students Career Program</option>
                         <option value="Forex Market Trading">Forex Market Trading</option>
                         <option value="Personal Mentorship Program">Personal Mentorship</option>
                     </select>
@@ -1812,15 +1999,27 @@
                     <textarea id="modal-message" placeholder="Any specific questions or requirements?"></textarea>
                 </div>
                 
-                <button type="submit" class="cta-button" style="width: 100%;">Submit Enrollment</button>
+                <button type="submit" class="btn btn-block">Submit Enrollment</button>
             </form>
         </div>
     </div>
 
     <script>
-        // Bismillah - Trading Wolf Academy Website
-        console.log("Bismillah - Trading Wolf Academy Website Loaded");
-
+        // Bismillah - Trading Wolf Academy - FINAL PERFECTED VERSION
+        
+        // EmailJS Configuration - USING YOUR CREDENTIALS
+        const EMAILJS_CONFIG = {
+            USER_ID: "tKuHojZNFDPOeKcFF",           // Your Public Key
+            SERVICE_ID: "service_67m4g5j",          // Your Service ID
+            TEMPLATE_ID: "template_abgfytj"         // Your Template ID
+        };
+        
+        // Initialize EmailJS
+        (function() {
+            emailjs.init(EMAILJS_CONFIG.USER_ID);
+            console.log("✅ EmailJS initialized with User ID:", EMAILJS_CONFIG.USER_ID);
+        })();
+        
         // DOM Elements
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileNav = document.getElementById('mobileNav');
@@ -1828,328 +2027,84 @@
         const closeMobileNav = document.getElementById('closeMobileNav');
         const desktopEnrollButton = document.getElementById('desktopEnrollButton');
         const mobileEnrollButton = document.getElementById('mobileEnrollButton');
-        const enrollButtons = document.querySelectorAll('.enroll-course, #heroEnrollButton');
+        const heroEnrollButton = document.getElementById('heroEnrollButton');
+        const enrollButtons = document.querySelectorAll('.enroll-course');
         const enrollmentModal = document.getElementById('enrollmentModal');
         const closeModal = document.getElementById('closeModal');
         const enrollmentForm = document.getElementById('enrollmentForm');
-        const contactForm = document.getElementById('contactForm');
+        const appointmentForm = document.getElementById('appointmentForm');
         const notification = document.getElementById('notification');
         const closeNotif = document.querySelector('.close-notif');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const downloadBrochureBtn = document.getElementById('downloadBrochure');
         const stockTicker = document.getElementById('stockTicker');
-
-        // Mobile Navigation Toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-            mobileNavOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-
-        closeMobileNav.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            mobileNavOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        mobileNavOverlay.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            mobileNavOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Close mobile nav when clicking on links
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav ul li a');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-
-        // Modal Functions
-        function openEnrollmentModal(course = '') {
-            if (course) {
-                document.getElementById('modal-course').value = course;
-            }
-            enrollmentModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Enroll button handlers
-        desktopEnrollButton.addEventListener('click', () => openEnrollmentModal());
-        mobileEnrollButton.addEventListener('click', () => openEnrollmentModal());
         
-        enrollButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (button.classList.contains('enroll-course')) {
-                    const course = button.getAttribute('data-course');
-                    openEnrollmentModal(course);
-                } else {
-                    openEnrollmentModal();
+        // Initialize on DOM Load
+        document.addEventListener('DOMContentLoaded', function() {
+            initMobileMenu();
+            initStockTicker();
+            initSmoothScroll();
+            initModalHandlers();
+            initFormHandlers();
+            initNotificationSystem();
+            
+            // Debug info
+            console.log("🚀 Website loaded successfully");
+            console.log("📧 EmailJS configured:", EMAILJS_CONFIG.SERVICE_ID ? "Yes" : "No");
+            console.log("📱 Responsive design: Active");
+        });
+        
+        // ========== MOBILE MENU FUNCTIONS ==========
+        function initMobileMenu() {
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMobileNav.addEventListener('click', closeMobileMenu);
+            mobileNavOverlay.addEventListener('click', closeMobileMenu);
+            
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992 && mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
                 }
             });
-        });
-
-        closeModal.addEventListener('click', () => {
-            enrollmentModal.classList.remove('active');
+        }
+        
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            mobileNavOverlay.classList.remove('active');
             document.body.style.overflow = 'auto';
-        });
-
-        enrollmentModal.addEventListener('click', (e) => {
-            if (e.target === enrollmentModal) {
-                enrollmentModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Notification System
-        function showNotification(message, type = 'success') {
-            const notificationContent = document.querySelector('.notification-content');
-            notificationContent.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 5000);
         }
-
-        closeNotif.addEventListener('click', () => {
-            notification.classList.remove('show');
-        });
-
-        // Loading Overlay
-        function showLoading() {
-            loadingOverlay.classList.add('active');
-        }
-
-        function hideLoading() {
-            loadingOverlay.classList.remove('active');
-        }
-
-        // TELEGRAM INTEGRATION - UPDATED
-        async function submitForm(formData, formType) {
-            showLoading();
+        
+        // ========== STOCK TICKER FUNCTIONS ==========
+        function initStockTicker() {
+            const stocks = [
+                { symbol: "NIFTY 50", price: "18,245.30", change: "+1.25%", trend: "positive" },
+                { symbol: "SENSEX", price: "61,284.75", change: "+0.98%", trend: "positive" },
+                { symbol: "RELIANCE", price: "2,450.50", change: "+2.15%", trend: "positive" },
+                { symbol: "TCS", price: "3,425.80", change: "-0.45%", trend: "negative" },
+                { symbol: "HDFC BANK", price: "1,645.25", change: "+0.75%", trend: "positive" },
+                { symbol: "INFY", price: "1,520.40", change: "+1.20%", trend: "positive" },
+                { symbol: "HUL", price: "2,580.60", change: "-0.30%", trend: "negative" },
+                { symbol: "ITC", price: "425.80", change: "+0.90%", trend: "positive" },
+                { symbol: "ICICI BANK", price: "915.25", change: "+1.10%", trend: "positive" },
+                { symbol: "SBIN", price: "530.40", change: "+0.50%", trend: "positive" },
+                { symbol: "BHARTI AIRTEL", price: "820.60", change: "+1.80%", trend: "positive" },
+                { symbol: "KOTAK BANK", price: "1,740.90", change: "-0.20%", trend: "negative" },
+                { symbol: "AXIS BANK", price: "960.35", change: "+0.90%", trend: "positive" },
+                { symbol: "LT", price: "2,150.60", change: "+1.50%", trend: "positive" },
+                { symbol: "TATA MOTORS", price: "620.75", change: "-0.80%", trend: "negative" }
+            ];
             
-            try {
-                // ============================================
-                // TELEGRAM BOT SETTINGS - REPLACE WITH YOUR DETAILS
-                // ============================================
-                const BOT_TOKEN = '8354469109:AAGKx5eNlKi5vnlRsfoZMurMVucmCpTmijE'; // Your Bot Token
-                const CHAT_ID = 'YOUR_CHAT_ID'; // Your Chat ID (get it from: https://api.telegram.org/botYOUR_BOT_TOKEN/getUpdates)
-                // ============================================
-                
-                // Create Telegram message
-                const message = createTelegramMessage(formData, formType);
-                
-                // Send to Telegram
-                const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-                
-                const response = await fetch(telegramUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
-                    })
-                });
-                
-                const result = await response.json();
-                
-                hideLoading();
-                
-                if (result.ok) {
-                    showNotification('✅ Thank you! We will contact you shortly.', 'success');
-                    
-                    // Clear form if it's the enrollment modal
-                    if (document.getElementById('enrollmentForm')) {
-                        document.getElementById('enrollmentForm').reset();
-                    }
-                    
-                    return { success: true, message: 'Sent to Telegram successfully!' };
-                } else {
-                    console.error('Telegram error:', result);
-                    // Fallback to WhatsApp
-                    sendWhatsAppFallback(formData);
-                    return { 
-                        success: false, 
-                        message: 'Failed to send notification. Details sent to WhatsApp instead.' 
-                    };
-                }
-                
-            } catch (error) {
-                hideLoading();
-                console.error('Error:', error);
-                
-                // Fallback to WhatsApp
-                sendWhatsAppFallback(formData);
-                
-                return { 
-                    success: false, 
-                    message: 'Network error. Details sent to WhatsApp instead.' 
-                };
-            }
-        }
-
-        // Create beautiful Telegram message
-        function createTelegramMessage(data, type) {
-            const timestamp = new Date().toLocaleString('en-IN', {
-                timeZone: 'Asia/Kolkata',
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            // Emoji and title based on form type
-            let emoji, title;
-            if (type === 'enrollment') {
-                emoji = '🎓';
-                title = 'NEW ENROLLMENT REQUEST';
-            } else if (type === 'contact') {
-                emoji = '📞';
-                title = 'CALLBACK REQUEST';
-            } else {
-                emoji = '📄';
-                title = 'BROCHURE REQUEST';
-            }
-            
-            return `
-${emoji} <b>${title}</b>
-${'─'.repeat(30)}
-
-👤 <b>Name:</b> ${data.name || 'Not provided'}
-📱 <b>Phone:</b> ${data.phone || 'Not provided'}
-📧 <b>Email:</b> ${data.email || 'Not provided'}
-🎓 <b>Course:</b> ${data.course || 'Not specified'}
-💬 <b>Message:</b> ${data.message || 'No additional message'}
-
-📋 <b>Type:</b> ${type}
-⏰ <b>Time:</b> ${timestamp}
-📍 <b>Source:</b> Trading Wolf Academy
-
-<b>Priority:</b> ${type === 'enrollment' ? '🚨 HIGH PRIORITY' : '📞 MEDIUM PRIORITY'}
-<b>Status:</b> 🟢 NEW LEAD
-
-<i>Reply within 10 minutes for best conversion!</i>
-`;
-        }
-
-        // WhatsApp fallback function
-        function sendWhatsAppFallback(formData) {
-            const phone = '917338377942';
-            const message = `New Lead from Trading Wolf Academy:
-Name: ${formData.name}
-Phone: ${formData.phone}
-Email: ${formData.email || 'Not provided'}
-Course: ${formData.course || 'Not specified'}
-Message: ${formData.message || 'No message'}
-Time: ${new Date().toLocaleString('en-IN')}`;
-            
-            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // Form Submission Handlers
-        enrollmentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('modal-name').value.trim(),
-                phone: document.getElementById('modal-phone').value.trim(),
-                email: document.getElementById('modal-email').value.trim(),
-                course: document.getElementById('modal-course').value,
-                message: document.getElementById('modal-message').value.trim() || 'No additional message',
-                type: 'enrollment'
-            };
-
-            // Validation
-            if (!formData.name || !formData.phone || !formData.email || !formData.course) {
-                showNotification('Please fill in all required fields.', 'error');
-                return;
-            }
-
-            const result = await submitForm(formData, 'enrollment');
-            
-            if (result.success) {
-                enrollmentModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                email: document.getElementById('email').value.trim() || 'Not provided',
-                course: document.getElementById('course').value || 'Not specified',
-                message: 'Callback request from website',
-                type: 'contact'
-            };
-
-            if (!formData.name || !formData.phone) {
-                showNotification('Please provide at least your name and phone number.', 'error');
-                return;
-            }
-
-            await submitForm(formData, 'contact');
-            contactForm.reset();
-        });
-
-        // Download Brochure
-        downloadBrochureBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            
-            // Show a form to collect email for brochure
-            const userEmail = prompt('Please enter your email address to receive the brochure:');
-            
-            if (userEmail && userEmail.includes('@')) {
-                const formData = {
-                    name: 'Brochure Request',
-                    email: userEmail,
-                    type: 'brochure_request',
-                    message: 'Requested brochure download'
-                };
-
-                await submitForm(formData, 'brochure');
-            } else if (userEmail) {
-                showNotification('Please enter a valid email address.', 'error');
-            }
-        });
-
-        // Stock Ticker
-        const stocks = [
-            { symbol: "NIFTY 50", price: "18,245.30", change: "+1.25%", trend: "positive" },
-            { symbol: "SENSEX", price: "61,284.75", change: "+0.98%", trend: "positive" },
-            { symbol: "RELIANCE", price: "2,450.50", change: "+2.15%", trend: "positive" },
-            { symbol: "TCS", price: "3,425.80", change: "-0.45%", trend: "negative" },
-            { symbol: "HDFC BANK", price: "1,645.25", change: "+0.75%", trend: "positive" },
-            { symbol: "INFY", price: "1,520.40", change: "+1.20%", trend: "positive" },
-            { symbol: "HUL", price: "2,580.60", change: "-0.30%", trend: "negative" },
-            { symbol: "ITC", price: "425.80", change: "+0.90%", trend: "positive" },
-            { symbol: "ICICI BANK", price: "915.25", change: "+1.10%", trend: "positive" },
-            { symbol: "SBIN", price: "530.40", change: "+0.50%", trend: "positive" },
-            { symbol: "BHARTI AIRTEL", price: "820.60", change: "+1.80%", trend: "positive" },
-            { symbol: "KOTAK BANK", price: "1,740.90", change: "-0.20%", trend: "negative" },
-            { symbol: "AXIS BANK", price: "960.35", change: "+0.90%", trend: "positive" },
-            { symbol: "LT", price: "2,150.60", change: "+1.50%", trend: "positive" },
-            { symbol: "TATA MOTORS", price: "620.75", change: "-0.80%", trend: "negative" }
-        ];
-
-        function populateTicker() {
             stockTicker.innerHTML = '';
             
-            // Add double the items for seamless scrolling
             for (let i = 0; i < 2; i++) {
                 stocks.forEach(stock => {
                     const tickerItem = document.createElement('div');
@@ -2164,13 +2119,17 @@ Time: ${new Date().toLocaleString('en-IN')}`;
             }
             
             adjustTickerSpeed();
+            window.addEventListener('resize', adjustTickerSpeed);
         }
-
+        
         function adjustTickerSpeed() {
             const isMobile = window.innerWidth <= 768;
             const isSmallMobile = window.innerWidth <= 480;
+            const isExtraSmall = window.innerWidth <= 360;
             
-            if (isSmallMobile) {
+            if (isExtraSmall) {
+                stockTicker.style.animationDuration = '20s';
+            } else if (isSmallMobile) {
                 stockTicker.style.animationDuration = '25s';
             } else if (isMobile) {
                 stockTicker.style.animationDuration = '30s';
@@ -2178,43 +2137,342 @@ Time: ${new Date().toLocaleString('en-IN')}`;
                 stockTicker.style.animationDuration = '40s';
             }
         }
-
-        // Initialize ticker
-        populateTicker();
-
-        // Adjust on resize
-        window.addEventListener('resize', adjustTickerSpeed);
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
+        
+        // ========== SMOOTH SCROLL FUNCTIONS ==========
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
-        });
-
-        // Close mobile nav on window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992 && mobileNav.classList.contains('active')) {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
+        }
+        
+        // ========== MODAL FUNCTIONS ==========
+        function initModalHandlers() {
+            // Open enrollment modal
+            function openEnrollmentModal(course = '') {
+                if (course) {
+                    document.getElementById('modal-course').value = course;
+                }
+                enrollmentModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
             
-            adjustTickerSpeed();
+            // Set up enroll button handlers
+            desktopEnrollButton.addEventListener('click', () => openEnrollmentModal());
+            mobileEnrollButton.addEventListener('click', () => openEnrollmentModal());
+            heroEnrollButton.addEventListener('click', () => openEnrollmentModal());
+            
+            enrollButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const course = this.getAttribute('data-course');
+                    openEnrollmentModal(course);
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', closeEnrollmentModal);
+            
+            // Close modal on overlay click
+            enrollmentModal.addEventListener('click', function(e) {
+                if (e.target === enrollmentModal) {
+                    closeEnrollmentModal();
+                }
+            });
+            
+            // Close modal on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && enrollmentModal.classList.contains('active')) {
+                    closeEnrollmentModal();
+                }
+            });
+        }
+        
+        function closeEnrollmentModal() {
+            enrollmentModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // ========== FORM HANDLING FUNCTIONS ==========
+        function initFormHandlers() {
+            // Enrollment form submission
+            enrollmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = {
+                    name: document.getElementById('modal-name').value.trim(),
+                    phone: document.getElementById('modal-phone').value.trim(),
+                    email: document.getElementById('modal-email').value.trim(),
+                    course: document.getElementById('modal-course').value,
+                    message: document.getElementById('modal-message').value.trim() || 'No additional message',
+                    form_type: 'Enrollment Form'
+                };
+                
+                // Validation
+                if (!validateForm(formData, ['name', 'phone', 'email', 'course'])) {
+                    return;
+                }
+                
+                // Show loading
+                showLoading();
+                
+                // Send email via EmailJS
+                sendEmail(formData, 'Enrollment request submitted successfully!');
+            });
+            
+            // Appointment/Callback form submission
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('appointment-name').value.trim(),
+                    phone: document.getElementById('appointment-phone').value.trim(),
+                    email: document.getElementById('appointment-email').value.trim() || 'Not provided',
+                    purpose: document.getElementById('appointment-purpose').value || 'Not specified',
+                    date: document.getElementById('appointment-date').value || 'Not specified',
+                    message: document.getElementById('appointment-message').value.trim() || 'No additional details',
+                    form_type: 'Appointment/Callback Request'
+                };
+                
+                // Validation
+                if (!validateForm(formData, ['name', 'phone', 'purpose'])) {
+                    return;
+                }
+                
+                // Show loading
+                showLoading();
+                
+                // Send email via EmailJS
+                sendEmail(formData, 'Request submitted successfully! We will contact you shortly.');
+            });
+            
+            // Download brochure button
+            downloadBrochureBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoading();
+                
+                setTimeout(() => {
+                    hideLoading();
+                    showNotification('📄 Brochure download has started. Check your downloads folder!', 'success');
+                    
+                    // Create a fake download
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.download = 'Trading-Wolf-Academy-Brochure.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }, 1000);
+            });
+        }
+        
+        // ========== EMAILJS FUNCTIONS ==========
+        function sendEmail(formData, successMessage) {
+            // Prepare email data - matches your template variables
+            const emailData = {
+                name: formData.name,
+                phone: formData.phone,
+                email: formData.email || 'Not provided',
+                course: formData.course || formData.purpose || 'Not specified',
+                date: formData.date || 'Not specified',
+                message: formData.message || 'No additional message',
+                form_type: formData.form_type,
+                title: formData.form_type
+            };
+            
+            console.log('📧 Sending email data:', emailData);
+            
+            // Send email via EmailJS
+            emailjs.send(
+                EMAILJS_CONFIG.SERVICE_ID,
+                EMAILJS_CONFIG.TEMPLATE_ID,
+                emailData
+            )
+            .then(function(response) {
+                console.log('✅ Email sent successfully:', response);
+                hideLoading();
+                showNotification('✅ ' + successMessage, 'success');
+                
+                // Reset forms
+                enrollmentForm.reset();
+                appointmentForm.reset();
+                
+                // Close modal if open
+                closeEnrollmentModal();
+            }, function(error) {
+                console.error('❌ Email sending failed:', error);
+                console.error('🔍 Error details:', error.text || error.message);
+                hideLoading();
+                
+                // User-friendly error message
+                let errorMsg = 'Failed to send request. ';
+                if (error.text && error.text.includes('400')) {
+                    errorMsg = 'Please check your internet connection and try again.';
+                } else if (error.text) {
+                    errorMsg += 'Error: ' + error.text;
+                } else {
+                    errorMsg += 'Please try again or contact us directly.';
+                }
+                
+                showNotification('❌ ' + errorMsg, 'error');
+            });
+        }
+        
+        // ========== FORM VALIDATION ==========
+        function validateForm(formData, requiredFields) {
+            // Check required fields
+            for (const field of requiredFields) {
+                if (!formData[field]) {
+                    showNotification(`Please fill in the ${field.replace('_', ' ')} field.`, 'error');
+                    return false;
+                }
+            }
+            
+            // Phone validation
+            if (formData.phone && !/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
+                showNotification('Please enter a valid 10-digit phone number.', 'error');
+                return false;
+            }
+            
+            // Email validation
+            if (formData.email && formData.email !== 'Not provided') {
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                    showNotification('Please enter a valid email address.', 'error');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        // ========== NOTIFICATION SYSTEM ==========
+        function initNotificationSystem() {
+            closeNotif.addEventListener('click', function() {
+                notification.classList.remove('show');
+            });
+            
+            // Auto-hide notifications after 5 seconds
+            notification.addEventListener('animationend', function() {
+                if (notification.classList.contains('show')) {
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 5000);
+                }
+            });
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notificationContent = document.querySelector('.notification-content');
+            notificationContent.textContent = message;
+            
+            // Reset and show notification
+            notification.className = 'notification';
+            notification.classList.add(type, 'show');
+        }
+        
+        // ========== LOADING FUNCTIONS ==========
+        function showLoading() {
+            loadingOverlay.classList.add('active');
+        }
+        
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+        
+        // ========== ADDITIONAL ENHANCEMENTS ==========
+        // Header shadow on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
         });
+        
+        // Animate course cards on scroll
+        function animateOnScroll() {
+            const courseCards = document.querySelectorAll('.course-card');
+            const options = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, options);
+            
+            courseCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        }
+        
+        // Initialize animations when page loads
+        window.addEventListener('load', animateOnScroll);
+        
+        // Form input validation styling
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '' && this.hasAttribute('required')) {
+                    this.style.borderColor = 'var(--accent-red)';
+                } else {
+                    this.style.borderColor = '#ddd';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#ddd';
+            });
+        });
+        
+        // Test EmailJS connection (optional - remove in production)
+        function testEmailJS() {
+            console.log("🧪 Testing EmailJS connection...");
+            
+            const testData = {
+                name: "Test User",
+                phone: "9876543210",
+                email: "test@test.com",
+                course: "Testing",
+                message: "This is a test email",
+                form_type: "Test",
+                title: "Test Form"
+            };
+            
+            emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, testData)
+                .then(function(response) {
+                    console.log('✅ Test email SUCCESS!', response);
+                })
+                .catch(function(error) {
+                    console.error('❌ Test email FAILED:', error);
+                });
+        }
+        
+        // Uncomment to test on page load
+        // setTimeout(testEmailJS, 3000);
     </script>
 </body>
 </html>
